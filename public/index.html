@@ -6,13 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    Hello Messaging Application
+ 
 
+    <input id="message" type="text">
     <button id="send">
            Click ME
     </button>
 
-    <div id="container"></div>
+    <div style="padding-top: 20px;" id="container"></div>
 
 
 
@@ -21,18 +22,45 @@
         const socket = io();
 
         const buttonAccess=document.getElementById("send");
+        const inputElement=document.getElementById("message");
         
         buttonAccess.addEventListener('click',()=>{
-            socket.emit('chat message', "Jay Shree Ram");
+            socket.emit('chat message',inputElement.value);
+            inputElement.value="";
         })
 
-        socket.on('JAY JAY', (msg) => {
+        socket.on('Send mess',(msg)=>{
             const newDiv=document.createElement('div');
+            const parent=document.getElementById("container");
             newDiv.innerText=msg;
-            const cont=document.getElementById('container');
-            cont.appendChild(newDiv);
-            document.appendChild(document.getElementById('container'));
-        });
+            newDiv.style.backgroundColor = 'lightblue';
+            newDiv.style.padding = '10px';
+            newDiv.style.border = '1px solid black';
+            newDiv.style.borderRadius = '5px';
+            newDiv.style.margin = '10px 0';
+            newDiv.style.fontFamily = 'Arial, sans-serif';
+            newDiv.style.fontSize = '14px';
+            document.appendChild(parent.appendChild(newDiv));
+
+        })
+
+
+
+
+
+
+
+
+
+
+
+        // socket.on('JAY JAY', (msg) => {
+        //     const newDiv=document.createElement('div');
+        //     newDiv.innerText=msg;
+        //     const cont=document.getElementById('container');
+        //     cont.appendChild(newDiv);
+        //     document.appendChild(document.getElementById('container'));
+        // });
 
      
      </script>

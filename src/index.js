@@ -5,6 +5,7 @@ import {dirname,join} from "path"
 import { fileURLToPath } from 'url';
 import {Server} from "socket.io"
 
+
 const app=express();
 const server=createServer(app);
 const io = new Server(server);
@@ -18,14 +19,17 @@ app.get('/', (req, res) => {
 
  server.listen(PORT,()=>{
  
-      io.on('connection', (socket) => {
-        socket.on('chat message', (msg) => {
-          console.log('message:',msg );
-          socket.emit("JAY JAY","SERVER SE");
+       io.on('connection', (socket) => {
+         console.log("Connected to the server")
+
+         socket.on('chat message', (msg) => {
+             io.emit('Send mess',msg);
         });
-      });
-        
+
+       });
+
      
-        console.log("Server is up and running on port no",PORT);
+        
+     console.log("Server is up and running on port no",PORT);
 
  })
