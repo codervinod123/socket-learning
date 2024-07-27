@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Hello Messaging Application
+
+    <button id="send">
+           Click ME
+    </button>
+
+    <div id="container"></div>
+
+
+
+    <script src="/socket.io/socket.io.js"></script>
+      <script>
+        const socket = io();
+
+        const buttonAccess=document.getElementById("send");
+        
+        buttonAccess.addEventListener('click',()=>{
+            socket.emit('chat message', "Jay Shree Ram");
+        })
+
+        socket.on('JAY JAY', (msg) => {
+            const newDiv=document.createElement('div');
+            newDiv.innerText=msg;
+            const cont=document.getElementById('container');
+            cont.appendChild(newDiv);
+            document.appendChild(document.getElementById('container'));
+        });
+
+     
+     </script>
+</body>
+</html>
